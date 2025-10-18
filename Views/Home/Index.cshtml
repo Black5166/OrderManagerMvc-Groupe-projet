@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Explicitly set layout
+}
+
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="background-image: linear-gradient(to right, burlywood, wheat);">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Order Manager</h1>
+        <p>Manage your orders, order items, customers, and products efficiently.</p>
+        <div class="mt-4">
+            <a asp-controller="Orders" asp-action="Index" class="btn btn-primary">View Orders</a>
+            <a asp-controller="OrderItems" asp-action="Index" class="btn btn-primary">View Order Items</a>
+            <a asp-controller="Customers" asp-action="Index" class="btn btn-primary">View Customers</a>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-primary">View Products</a>
+        </div>
+    </div>
+</div>
