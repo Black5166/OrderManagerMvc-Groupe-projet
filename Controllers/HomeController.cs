@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OrderManagerMvc.Models;
 using System.Diagnostics;
 
 namespace OrderManagerMvc.Controllers
@@ -26,18 +27,19 @@ namespace OrderManagerMvc.Controllers
             return View();
         }
 
+        // Handles both generic and custom error messages
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(string? message = null)
         {
-            _logger.LogError("An error occurred at {Time}", DateTime.UtcNow);
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _logger.LogError("Error occurred at {Time}: {Message}", DateTime.UtcNow, message ?? "Unknown error");
+
+            var model = new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                ErrorMessage = message ?? "An unexpected error occurred. Please try again later."
+            };
+
+            return View(model);
         }
-    }
-
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

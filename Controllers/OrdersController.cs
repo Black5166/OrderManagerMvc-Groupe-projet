@@ -5,21 +5,27 @@ using OrderManagerMvc.Data;
 using OrderManagerMvc.Models;
 
 namespace OrderManagerMvc.Controllers
+
+
 {
     public class OrdersController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(AppDbContext db)
+        public OrdersController(AppDbContext db, ILogger<OrdersController> logger)
         {
             _db = db;
+            _logger = logger;
         }
 
         // GET: /Orders
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Order list viewed at {Time}", DateTime.UtcNow);
             var orders = await _db.Orders
                 .Include(o => o.Customer)
+                .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
             return View(orders);
         }
@@ -28,12 +34,15 @@ namespace OrderManagerMvc.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
+
             var order = await _db.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (order == null) return NotFound();
+
             return View(order);
         }
 
@@ -54,8 +63,10 @@ namespace OrderManagerMvc.Controllers
                 order.OrderDate = DateTime.UtcNow;
                 _db.Add(order);
                 await _db.SaveChangesAsync();
+                TempData["Success"] = "Order created successfully!";
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.CustomerId = new SelectList(await _db.Customers.ToListAsync(), "Id", "Name", order.CustomerId);
             return View(order);
         }
@@ -64,8 +75,10 @@ namespace OrderManagerMvc.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
+
             var order = await _db.Orders.FindAsync(id);
             if (order == null) return NotFound();
+
             ViewBag.CustomerId = new SelectList(await _db.Customers.ToListAsync(), "Id", "Name", order.CustomerId);
             return View(order);
         }
@@ -76,12 +89,24 @@ namespace OrderManagerMvc.Controllers
         public async Task<IActionResult> Edit(int id, Order order)
         {
             if (id != order.Id) return NotFound();
+
             if (ModelState.IsValid)
             {
-                _db.Update(order);
-                await _db.SaveChangesAsync();
+                try
+                {
+                    _db.Update(order);
+                    await _db.SaveChangesAsync();
+                    TempData["Success"] = "Order updated successfully!";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_db.Orders.Any(e => e.Id == order.Id))
+                        return NotFound();
+                    throw;
+                }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.CustomerId = new SelectList(await _db.Customers.ToListAsync(), "Id", "Name", order.CustomerId);
             return View(order);
         }
@@ -90,10 +115,13 @@ namespace OrderManagerMvc.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
+
             var order = await _db.Orders
                 .Include(o => o.Customer)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (order == null) return NotFound();
+
             return View(order);
         }
 
@@ -107,7 +135,9 @@ namespace OrderManagerMvc.Controllers
             {
                 _db.Orders.Remove(order);
                 await _db.SaveChangesAsync();
+                TempData["Success"] = "Order deleted successfully!";
             }
+
             return RedirectToAction(nameof(Index));
         }
     }

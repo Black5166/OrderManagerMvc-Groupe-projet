@@ -26,7 +26,7 @@ namespace OrderManagerMvc.Data
 
 
             // Seed one sample order
-            var order = new Order { CustomerId = customers[0].Id, OrderDate = DateTime.UtcNow, Status="Submitted" };
+            var order = new Order { CustomerId = customers[0].Id, OrderDate = DateTime.UtcNow, Status = "Submitted" };
             db.Orders.Add(order);
             db.SaveChanges();
 

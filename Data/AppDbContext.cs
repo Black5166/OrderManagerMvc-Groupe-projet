@@ -22,7 +22,7 @@ namespace OrderManagerMvc.Data
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerId)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Order)
@@ -36,15 +36,15 @@ namespace OrderManagerMvc.Data
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-              modelBuilder.Entity<OrderItem>()
-                .Property(p => p.UnitPrice)
-                .HasPrecision(18, 2);
+            modelBuilder.Entity<OrderItem>()
+              .Property(p => p.UnitPrice)
+              .HasPrecision(18, 2);
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.UnitPrice)
                 .HasPrecision(18, 2);
 
-        
+
             modelBuilder.Entity<Product>()
                 .HasIndex(p => p.Sku)
                 .IsUnique();
@@ -61,7 +61,7 @@ namespace OrderManagerMvc.Data
             );
 
             modelBuilder.Entity<Order>().HasData(
-                new Order { Id = 1, CustomerId = 1, OrderDate = DateTime.UtcNow.AddDays(-1), Status = "Draft" }
+                new Order { Id = 1, CustomerId = 1, OrderDate = new DateTime(2025, 10, 17), Status = "Draft" }
             );
 
             modelBuilder.Entity<OrderItem>().HasData(

@@ -114,7 +114,7 @@ namespace OrderManagerMvc.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CustomerId", "OrderDate", "Status" },
-                values: new object[] { 1, 1, new DateTime(2025, 10, 16, 0, 45, 6, 245, DateTimeKind.Utc).AddTicks(4660), "Draft" });
+                values: new object[] { 1, 1, new DateTime(2025, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Draft" });
 
             migrationBuilder.InsertData(
                 table: "OrderItems",
