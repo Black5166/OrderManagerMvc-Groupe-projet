@@ -100,7 +100,7 @@ namespace OrderManagerMvc.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            OrderDate = new DateTime(2025, 10, 16, 0, 45, 6, 245, DateTimeKind.Utc).AddTicks(4660),
+                            OrderDate = new DateTime(2025, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Draft"
                         });
                 });
@@ -205,7 +205,7 @@ namespace OrderManagerMvc.Migrations
             modelBuilder.Entity("OrderManagerMvc.Models.OrderItem", b =>
                 {
                     b.HasOne("OrderManagerMvc.Models.Order", "Order")
-                        .WithMany("Items")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -228,7 +228,7 @@ namespace OrderManagerMvc.Migrations
 
             modelBuilder.Entity("OrderManagerMvc.Models.Order", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("OrderManagerMvc.Models.Product", b =>

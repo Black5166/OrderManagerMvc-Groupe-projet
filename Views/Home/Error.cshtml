@@ -1,0 +1,17 @@
+﻿musing Microsoft.AspNetCore.Mvc;
+namespace OrderManagerMvc.Models
+{
+    public class ErrorViewModel
+    {
+        public string? RequestId { get; set; }
+        public string? ErrorMessage { get; set; }
+
+        // ShowRequestId returns true if RequestId is not empty
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+        public override string ToString()
+        {
+            return $"Error: {ErrorMessage ?? "Unknown error"} (RequestId: {RequestId})";
+        }
+    }
+}
