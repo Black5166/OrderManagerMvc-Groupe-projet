@@ -3,31 +3,48 @@
     ViewData["Title"] = "Create Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="background-color:darkslategray; background-image: linear-gradient(to right, #FF6F61, #FFA07A, #FF6F61);">
+    <style>
+        .btn-blue:hover {
+            box-shadow: 0 0 10px #B0E0E0;
+            transform: scale(1.05);
+            background-color: #1E90ff;
+            color: black;
+        }
 
-<h2>Create Customer</h2>
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Phone" class="control-label"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Address" class="control-label"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
-<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        .btn-gray:hover {
+            box-shadow: 0 0 10px #36454F;
+            transform: scale(1.05);
+            background-color: #708090;
+            color: black;
+        }
+    </style>
+
+    <h2 class="fs-3  fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000">Customers</h2>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-blue" />
+        </div>
+    </form>
+    <a asp-action="Index" class="btn btn-gray">Back to List</a>
+</div>
