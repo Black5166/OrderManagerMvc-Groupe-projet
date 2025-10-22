@@ -1,77 +1,50 @@
 ﻿@model OrderManagerMvc.Models.OrderItem
 @{
     ViewData["Title"] = "Create Order Item";
-    Layout = "~/Views/Shared/_Layout.cshtml";
     var orders = ViewBag.Orders as List<OrderManagerMvc.Models.Order> ?? new List<OrderManagerMvc.Models.Order>();
     var products = ViewBag.Products as List<OrderManagerMvc.Models.Product> ?? new List<OrderManagerMvc.Models.Product>();
 }
-
-<div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="background-color:darkgoldenrod; background-image: linear-gradient(to right,goldenrod, #EEDC88, goldenrod);">
-    
-
-    <style>
-        .btn-blue:hover {
-            box-shadow: 0 0 10px #B0E0E0;
-            transform: scale(1.05);
-            background-color: #1E90ff;
-            color: black;
-        }
-
-        .btn-gray:hover {
-            box-shadow: 0 0 10px #36454F;
-            transform: scale(1.05);
-            background-color: #708090;
-            color: black;
-        }
-    </style>
-
-
-
-
-    <h3 class ="fs-3  fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000;">Create Order Item</h3>
-    <form asp-action="Create" method="post">
-        <div class="mb-3">
-            <label asp-for="OrderId" class="form-label"></label>
-            <select asp-for="OrderId" class="form-select" asp-items="@(new SelectList(orders, "Id", "Id"))">
-                <option value="">Select an order</option>
-                @foreach (var o in orders)
-                {
-                    <option value="@o.Id">#@o.Id - @o.OrderDate.ToString("yyyy-MM-dd")</option>
-                }
-            </select>
-            <span asp-validation-for="OrderId" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="ProductId" class="form-label"></label>
-            <select asp-for="ProductId" class="form-select" asp-items="@(new SelectList(products, "Id", "Name"))">
-                <option value="">Select a product</option>
-                @foreach (var p in products)
-                {
-                    <option value="@p.Id">@p.Name</option>
-                }
-            </select>
-            <span asp-validation-for="ProductId" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Quantity" class="form-label"></label>
-            <input asp-for="Quantity" class="form-control" type="number" min="1" required />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="UnitPrice" class="form-label">Unit Price (leave 0 to use product price)</label>
-            <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" min="0" value="0" />
-            <span asp-validation-for="UnitPrice" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-blue">Create</button>
-            <a asp-action="Index" class="btn btn-gray">Back</a>
-        </div>
-    </form>
-    @section Scripts {
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.11/dist/jquery.validate.unobtrusive.min.js"></script>
-    }
-
-</div>
-
+<h3>Create Order Item</h3>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="OrderId" class="form-label"></label>
+        <select asp-for="OrderId" class="form-select" asp-items="@(new SelectList(orders, "Id", "Id"))">
+            <option value="">Select an order</option>
+            @foreach (var o in orders)
+            {
+                <option value="@o.Id">#@o.Id - @o.OrderDate.ToString("yyyy-MM-dd")</option>
+            }
+        </select>
+        <span asp-validation-for="OrderId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ProductId" class="form-label"></label>
+        <select asp-for="ProductId" class="form-select" asp-items="@(new SelectList(products, "Id", "Name"))">
+            <option value="">Select a product</option>
+            @foreach (var p in products)
+            {
+                <option value="@p.Id">@p.Name</option>
+            }
+        </select>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" class="form-control" type="number" min="1" required />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="UnitPrice" class="form-label">Unit Price (leave 0 to use product price)</label>
+        <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" min="0" value="0" />
+        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.11/dist/jquery.validate.unobtrusive.min.js"></script>
+}

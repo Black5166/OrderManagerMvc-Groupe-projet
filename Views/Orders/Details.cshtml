@@ -1,31 +1,9 @@
 ﻿@model OrderManagerMvc.Models.Order
 @{
     ViewData["Title"] = "Order Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="container mt-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="background-color:darkgreen; background-image: linear-gradient(to right,darkgreen, #EEDC88, darkgreen);">
-    
-    <style>
-        .btn-blue:hover {
-            box-shadow: 0 0 10px #B0E0E0;
-            transform: scale(1.05);
-            background-color: #1E90ff;
-            color: black;
-        }
-
-        .btn-gray:hover {
-            box-shadow: 0 0 10px #36454F;
-            transform: scale(1.05);
-            background-color: #708090;
-            color: black;
-        }
-
-    </style>
-
-
-    <h3 class="fs-3  fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000">Order Details</h3>
-    
+<h3>Order Details</h3>
+<div>
     <dl class="row">
         <dt class="col-sm-2">Customer</dt>
         <dd class="col-sm-10">@(Model.Customer?.Name ?? "N/A")</dd>
@@ -34,7 +12,7 @@
         <dt class="col-sm-2">Status</dt>
         <dd class="col-sm-10">@Model.Status</dd>
     </dl>
-    <h4 class="fs-2  fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000">Order Items</h4>
+    <h4>Order Items</h4>
     <table class="table">
         <thead>
             <tr>
@@ -62,6 +40,6 @@
             </tr>
         </tfoot>
     </table>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-blue">Edit</a>
-    <a asp-action="Index" class="btn btn-gray">Back</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
 </div>

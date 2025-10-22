@@ -1,54 +1,68 @@
 @using OrderManagerMvc.Models
 @{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Explicitly set layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="background-color:darkslategray; background-image: linear-gradient(to right, darkslategray, #00CED1, darkslategray);">
 
-
-    <div class="text-center py-4  ">
-        <h1 class="display-4  fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000;">Welcome to Order Manager</h1>
+<div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="background-color: darkslategray; background-image: linear-gradient(to right, darkslategray, #00CED1, darkslategray);">
+    <div class="text-center py-4">
+        <h1 class="display-4 fw-bolder" style="color: #B0C4DE; text-shadow: 2px 2px 6px #000;">Welcome to Order Manager</h1>
         <p style="color: #B0C4DE; text-shadow: 2px 2px 6px #000;">
             Manage your orders, order items, customers, and products efficiently.
         </p>
-        <style>
+    </div>
 
+    <style>
+        .btn-green {
+            background-color: #3CB371; 
+            color: white;
+        }
 
-            .btn-green:hover {
-                box-shadow: 0 0 10px #ACE1AF;
-                transform: scale(1.05);
-                background-color: #ACE1AF;
-                color: black;
-            }
+        .btn-gold {
+            background-color: #DAA520; 
+            color: white;
+        }
 
-            .btn-gold:hover {
-                box-shadow: 0 0 10px #E6BE8A;
-                transform: scale(1.05);
-                background-color: #E6BE8A;
-                color: #2F4F4F;
-            }
+        .btn-coral {
+            background-color: #FF7F50; 
+            color: white;
+        }
 
-            .btn-coral:hover {
-                box-shadow: 0 0 10px #F08080;
-                transform: scale(1.05);
-                background-color: #F08080;
-                color: black;
-            }
+        .btn-purple {
+            background-color: #9370DB; 
+            color: white;
+        }
 
+            .btn-green:hover,
+            .btn-gold:hover,
+            .btn-coral:hover,
             .btn-purple:hover {
-                box-shadow: 0 0 10px #B0A3D4;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 transform: scale(1.05);
-                background-color: #B0A3D4;
                 color: #2F4F4F;
             }
 
-        </style>
-        <div class=" btn-group shadow-lg m-0 p-0 bg-body-tertiary rounded" role="group">
-            <a asp-controller="Orders" asp-action="Index" class="btn btn-green">View Orders</a>
-            <a asp-controller="OrderItems" asp-action="Index" class="btn btn-gold">View Order Items</a>
-            <a asp-controller="Customers" asp-action="Index" class="btn btn-coral">View Customers</a>
-            <a asp-controller="Products" asp-action="Index" class="btn btn-purple">View Products</a>
-        </div>
+        .btn-green:hover {
+            background-color: #ACE1AF;
+        }
+
+        .btn-gold:hover {
+            background-color: #E6BE8A;
+        }
+
+        .btn-coral:hover {
+            background-color: #C4AEAD;
+        }
+
+        .btn-purple:hover {
+            background-color: #B0A3D4;
+        }
+    </style>
+
+    <div class="btn-group shadow-lg m-0 p-0 bg-body-tertiary rounded" role="group">
+        <a asp-controller="Orders" asp-action="Index" class="btn btn-green">View Orders</a>
+        <a asp-controller="OrderItems" asp-action="Index" class="btn btn-gold">View Order Items</a>
+        <a asp-controller="Customers" asp-action="Index" class="btn btn-coral">View Customers</a>
+        <a asp-controller="Products" asp-action="Index" class="btn btn-purple">View Products</a>
     </div>
 </div>
-
